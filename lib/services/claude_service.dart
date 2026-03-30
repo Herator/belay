@@ -9,40 +9,48 @@ class ClaudeService {
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${profile.apiKey}',
     );
 
-    final response = await http
-        .post(
-          url,
-          headers: {'content-type': 'application/json'},
-          body: jsonEncode({
-            'contents': [
-              {
-                'parts': [
-                  {'text': _buildPrompt(profile)}
-                ]
-              }
-            ],
-            'generationConfig': {
-              'maxOutputTokens': 8192,
-              'temperature': 0.7,
-            },
-          }),
-        )
-        .timeout(const Duration(minutes: 3));
+    final body = jsonEncode({
+      'contents': [
+        {
+          'parts': [
+            {'text': _buildPrompt(profile)}
+          ]
+        }
+      ],
+      'generationConfig': {
+        'maxOutputTokens': 8192,
+        'temperature': 0.7,
+      },
+    });
 
-    if (response.statusCode != 200) {
-      final err = jsonDecode(response.body);
-      throw Exception(
-          err['error']?['message'] ?? 'API error ${response.statusCode}');
+    http.Response response;
+    for (var attempt = 1; attempt <= 3; attempt++) {
+      response = await http
+          .post(url, headers: {'content-type': 'application/json'}, body: body)
+          .timeout(const Duration(minutes: 3));
+
+      if (response.statusCode == 429) {
+        if (attempt == 3) throw Exception('Rate limit reached. Please wait a minute and try again.');
+        await Future.delayed(Duration(seconds: 15 * attempt));
+        continue;
+      }
+
+      if (response.statusCode != 200) {
+        final err = jsonDecode(response.body);
+        throw Exception(err['error']?['message'] ?? 'API error ${response.statusCode}');
+      }
+
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final text = data['candidates'][0]['content']['parts'][0]['text'] as String;
+      final planJson = jsonDecode(_extractJson(text)) as Map<String, dynamic>;
+
+      return GeneratedPlan.fromJson({
+        ...planJson,
+        'generated_at': DateTime.now().toIso8601String(),
+      });
     }
 
-    final data = jsonDecode(response.body) as Map<String, dynamic>;
-    final text = data['candidates'][0]['content']['parts'][0]['text'] as String;
-    final planJson = jsonDecode(_extractJson(text)) as Map<String, dynamic>;
-
-    return GeneratedPlan.fromJson({
-      ...planJson,
-      'generated_at': DateTime.now().toIso8601String(),
-    });
+    throw Exception('Failed to generate plan after 3 attempts.');
   }
 
   String _extractJson(String text) {

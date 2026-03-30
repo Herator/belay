@@ -6,7 +6,7 @@ import '../models/generated_plan.dart';
 class ClaudeService {
   Future<GeneratedPlan> generatePlan(UserProfile profile) async {
     final url = Uri.parse(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${profile.apiKey}',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${profile.apiKey}',
     );
 
     final body = jsonEncode({
@@ -30,8 +30,8 @@ class ClaudeService {
           .timeout(const Duration(minutes: 3));
 
       if (response.statusCode == 429) {
-        if (attempt == 3) throw Exception('Rate limit reached. Please wait a minute and try again.');
-        await Future.delayed(Duration(seconds: 15 * attempt));
+        if (attempt == 3) throw Exception('Rate limit reached. Please get a fresh API key at aistudio.google.com or try again in a few minutes.');
+        await Future.delayed(const Duration(seconds: 60));
         continue;
       }
 

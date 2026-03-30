@@ -6,7 +6,7 @@ import '../models/generated_plan.dart';
 class ClaudeService {
   Future<GeneratedPlan> generatePlan(UserProfile profile) async {
     final url = Uri.parse(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${profile.apiKey}',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${profile.apiKey}',
     );
 
     final body = jsonEncode({

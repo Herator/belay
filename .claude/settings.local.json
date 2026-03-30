@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(winget upgrade:*)",
+      "Bash(flutter create:*)",
+      "Bash(/c/flutter/bin/flutter create:*)",
+      "Bash(where flutter:*)",
+      "Read(//proc/**)",
+      "Read(//mnt/c/Users/herma/AppData/**)",
+      "Bash(echo \"$PATH\")",
+      "Bash(FLUTTER=\"/c/Users/herma/ikt205g26v/assignment-1-flutter/flutter/bin/flutter\")",
+      "Bash(echo \"Testing: $FLUTTER\")",
+      "Bash(\"$FLUTTER\" --version)",
+      "Bash(cmd.exe /c \"flutter --version\")",
+      "Bash(cmd.exe /c \"flutter --version 2>&1\")",
+      "Bash(powershell.exe -Command \"flutter --version\")",
+      "Bash(powershell.exe -Command \"Get-Command flutter -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\" 2>&1)",
+      "Bash(powershell.exe -Command \"\nGet-ChildItem 'C:\\\\Users\\\\herma\\\\ikt205g26v' -ErrorAction SilentlyContinue | Select-Object Name\n\" 2>&1)",
+      "Bash(powershell.exe -Command \"Test-Path 'C:\\\\Users\\\\herma\\\\ikt205g26v'\" 2>&1)",
+      "Bash(powershell.exe -Command \"\nGet-ChildItem -Path 'C:\\\\' -Filter 'flutter.bat' -Recurse -ErrorAction SilentlyContinue -Depth 6 | Select-Object -First 5 FullName\n\" 2>&1)",
+      "Bash(FLUTTER=\"C:/flutter/flutter_windows_3.41.6-stable/flutter/bin/flutter\")",
+      "Bash(powershell.exe -Command \"& ''C:\\\\flutter\\\\flutter_windows_3.41.6-stable\\\\flutter\\\\bin\\\\flutter.bat'' create --project-name belay --org com.belay --platforms web ''C:\\\\Users\\\\herma\\\\Documents\\\\websites\\\\belay''\")",
+      "Bash(powershell.exe -Command \"& ''C:\\\\flutter\\\\flutter_windows_3.41.6-stable\\\\flutter\\\\bin\\\\flutter.bat'' pub get\")",
+      "Bash(powershell.exe -Command \"& ''C:\\\\flutter\\\\flutter_windows_3.41.6-stable\\\\flutter\\\\bin\\\\flutter.bat'' build web --no-tree-shake-icons 2>&1\")",
+      "Bash(powershell.exe -Command \"Start-Process ''C:\\\\flutter\\\\flutter_windows_3.41.6-stable\\\\flutter\\\\bin\\\\flutter.bat'' -ArgumentList ''run -d chrome'' -WindowStyle Normal\")"
+    ]
+  }
+}

@@ -43792,7 +43792,7 @@ A.a0s.prototype={
 hy(a){return this.Zz(a)},
 Zz(a){var s=0,r=A.O(t.jV),q,p=this,o,n,m,l,k,j,i,h,g,f,e
 var $async$hy=A.P(function(b,c){if(b===1)return A.L(c,r)
-for(;;)switch(s){case 0:g=A.hi("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+a.b,0,null)
+for(;;)switch(s){case 0:g=A.hi("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="+a.b,0,null)
 f=t.N
 e=B.b7.zS(A.ah(["contents",A.b([A.ah(["parts",A.b([A.ah(["text",p.a5T(a)],f,f)],t.m0)],f,t.xW)],t.Ud),"generationConfig",A.ah(["maxOutputTokens",8192,"temperature",0.7],f,t.Ci)],f,t.K),null)
 o=t.z,n=1

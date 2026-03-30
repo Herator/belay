@@ -14,6 +14,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final _pageController = PageController();
   int _currentPage = 0;
+  bool _submitted = false;
 
   // Step 1 - API Key
   final _apiKeyCtrl = TextEditingController();
@@ -131,6 +132,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _submit() {
+    if (_submitted) return;
+    setState(() => _submitted = true);
     final profile = UserProfile(
       name: _nameCtrl.text.trim().isEmpty ? 'Athlete' : _nameCtrl.text.trim(),
       apiKey: _apiKeyCtrl.text.trim(),

@@ -36,6 +36,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   Future<void> generatePlan(UserProfile profile) async {
+    if (_state == AppState.generating) return;
     _state = AppState.generating;
     _errorMessage = null;
     _profile = profile;
